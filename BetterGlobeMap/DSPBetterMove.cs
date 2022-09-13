@@ -9,7 +9,7 @@ namespace DSPBetterMove
     {
         private const string PluginGuid = "redhot.plugin.DSPBetterMove";
         private const string PluginName = "DSPBetterMove";
-        private const string PluginVersion = "1.0.0.0";
+        private const string PluginVersion = "0.0.3";
 
         Harmony _harmony;
         private static Vector3 _dragBeginMousePosition;
