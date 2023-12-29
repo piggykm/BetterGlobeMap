@@ -273,9 +273,6 @@
     <Reference Include="UnityEngine.XRModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>H:\SteamLibrary\steamapps\common\Dyson Sphere Program\DSPGAME_Data\Managed\UnityEngine.XRModule.dll</HintPath>
     </Reference>
-    <Reference Include="WL3KoreanMod">
-      <HintPath>C:\Users\piggykm\Downloads\WL3KoreanModV2\BepInEx\plugins\WL3KoreanMod\WL3KoreanMod.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DSPBetterMove.cs" />

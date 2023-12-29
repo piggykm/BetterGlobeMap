@@ -1,6 +1,4 @@
-﻿using System;
-using System.Reflection;
-using BepInEx;
+﻿using BepInEx;
 using HarmonyLib;
 using UnityEngine;
 using BepInEx.Configuration;
@@ -13,14 +11,13 @@ namespace DSPBetterMove
     {
         private const string PluginGuid = "redhot.plugin.DSPBetterMove";
         private const string PluginName = "DSPBetterMove";
-        private const string PluginVersion = "0.0.0.4";
+        private const string PluginVersion = "0.0.0.6";
 
         Harmony _harmony;
         private static Vector3 _dragBeginMousePosition;
         private static RaycastHit _hitInfo;
         private static bool _hit;
         private static ConfigEntry<bool> _isDefault;
-        private static ConfigEntry<bool> _isSandInfinity;
 
         // Awake is called once when both the game and the plug-in are loaded
         void Awake()
@@ -29,9 +26,7 @@ namespace DSPBetterMove
 
             _harmony.PatchAll(typeof(DSPBetterMove));
             _isDefault = Config.Bind<bool>("General", "checkLabel", false, "false only)");
-            _isSandInfinity = Config.Bind<bool>("General", "checkItem", false, "false only)");
             Debug.Log(_isDefault.Value);
-            Debug.Log(_isSandInfinity.Value);
             Debug.Log("DSPBetterMove started!");
         }
 
@@ -65,21 +60,11 @@ namespace DSPBetterMove
         [HarmonyPatch(typeof(UIVersionText), "Refresh")]
         public static void RefreshPrefix(UIVersionText __instance)
         {
-            if (((Object)__instance.textComp != (Object)null) && _isDefault.Value)
-                __instance.textComp.text =
-                    !GameMain.isRunning || GameMain.instance.isMenuDemo ? string.Empty : string.Empty;
+            if ((__instance.textComp != null) && _isDefault.Value)
+                __instance.textComp.text = string.Empty;
         }
-
-        [HarmonyPostfix, HarmonyPatch(typeof(Player), "sandCount", MethodType.Getter)]
-        public static void SandCountPostfix(ref int __result)
-        {
-            if (_isSandInfinity.Value)
-            {
-                __result = 1000000;
-            }
-        }
-
-        void OnDestroy()
+        
+      void OnDestroy()
         {
             Debug.Log("Destroying BGM ;)");
             AssetBundle.UnloadAllAssetBundles(true);
